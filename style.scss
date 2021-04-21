@@ -1,0 +1,198 @@
+@import "variables";
+
+body {
+  background: var(--primary);
+}
+.hide {
+  display: inline-block !important;
+}
+.dis-flex {
+  display: flex !important;
+}
+
+.slidein {
+  animation: slide-in 2s ease-in-out;
+  @keyframes slide-in {
+    0% {
+      transform: skew(15deg) translateX(300px);
+      opacity: 0;
+    }
+    100% {
+      transform: skew(0) translateX(0);
+      opacity: 1;
+    }
+  }
+}
+.slideout {
+  animation: slide-out 1.5s ease-out;
+  @keyframes slide-out {
+    0% {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+.eliminate {
+  animation: mydel 0.35s forwards;
+  @keyframes mydel {
+    0% {
+      opacity: 1;
+    }
+    15% {
+      opacity: 0.75;
+    }
+    35% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.25;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+.switch {
+  transform: scale(1.1);
+  transition: all 1s;
+}
+section {
+  &.vessel {
+    color: var(--text-primary);
+    div {
+      &.navbar {
+        p {
+          transition: all 1s;
+          &:hover {
+            color: var(--navbar-hover);
+            cursor: pointer;
+          }
+        }
+      }
+      &.error-msg-empty,
+      &.error-msg-network {
+        display: none;
+        color: var(--text-danger);
+      }
+      &.welcome-msg-popup {
+        display: none;
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 5;
+        img {
+          border-radius: 50%;
+          width: 75px;
+          cursor: pointer;
+          opacity: var(--img-opacity);
+        }
+        p {
+          position: relative;
+          text-align: start;
+          display: inline-block;
+          border: 1px solid var(--text-primary) !important;
+          padding: 0.5rem 1rem 0.5rem 1rem;
+          i {
+            position: absolute;
+            right: 1rem;
+            cursor: pointer;
+            color: var(--text-danger);
+          }
+        }
+      }
+      &.theme-toggler {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        background: #252729;
+        cursor: pointer;
+        z-index: 5;
+        transition: all 2s;
+        &:hover {
+          opacity: var(--img-opacity);
+        }
+        i {
+          pointer-events: none;
+          font-size: 1.6rem;
+          color: #e2e2e2e7;
+        }
+      }
+      &.search-field {
+        input {
+          width: 300px;
+          border: var(--border-width) solid var(--outline);
+          &:hover {
+            border: var(--border-width) solid var(--input-hover);
+          }
+          &:focus {
+            outline: none;
+            border: var(--border-width) solid var(--outline);
+            box-shadow: 0 0 7px var(--input-focus) !important;
+          }
+        }
+        button {
+          border: none;
+          background: var(--secondary);
+          color: var(--button-text);
+          &:hover {
+            background: var(--hover-background);
+            color: var(--hover-text) !important;
+          }
+          &:focus {
+            outline: none;
+            color: var(--hover-text) !important;
+            border: 4px solid var(--outline);
+            box-shadow: 0 0 5px var(--outline);
+          }
+        }
+      }
+      &.users-container {
+        display: none;
+        .img-details {
+          img {
+            border-radius: 50%;
+            width: 200px;
+            box-shadow: 0 0 10px var(--img-shadow);
+            opacity: var(--img-opacity);
+          }
+        }
+        .contents {
+          ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(2, 120px);
+            justify-content: center;
+          }
+        }
+        .view {
+          button {
+            background: var(--secondary);
+            color: var(--button-text) !important;
+            &:hover {
+              background: var(--hover-background) !important;
+              color: var(--hover-text) !important;
+            }
+            &:focus {
+              outline: none;
+              color: var(--hover-text) !important;
+              border: 4px solid var(--outline);
+              box-shadow: 0 0 5px var(--outline);
+            }
+          }
+        }
+      }
+    }
+  }
+}

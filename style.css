@@ -1,0 +1,319 @@
+:root {
+  --primary: #1a1d20;
+  --secondary: #212529;
+  --text-primary: #6c757d;
+  --text-danger: #dc3545e3;
+  --button-text: #6c757d;
+  --hover-background: #2d3338;
+  --hover-text: #fff;
+  --navbar-hover: #fff;
+  --input-hover: var(--outline);
+  --input-focus: var(--text-primary);
+  --outline: #6c757d52;
+  --img-opacity: 0.85;
+  --img-shadow: #d8edff;
+  --border-width: 4px;
+}
+
+.normalmode {
+  --primary: #f2e9e4;
+  --secondary: #e13855;
+  --text-primary: #736c65;
+  --text-danger: #c70a2b;
+  --button-text: #fff;
+  --hover-background: #de2244;
+  --hover-text: #f2e9e4;
+  --navbar-hover: #de2244;
+  --input-hover: var(--hover-background);
+  --input-focus: var(--outline);
+  --outline: #d64c65;
+  --img-opacity: 0.93;
+  --img-shadow: #e13855ad;
+  --border-width: 2px;
+}
+
+body {
+  background: var(--primary);
+}
+
+.hide {
+  display: inline-block !important;
+}
+
+.dis-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.slidein {
+  -webkit-animation: slide-in 2s ease-in-out;
+          animation: slide-in 2s ease-in-out;
+}
+
+@-webkit-keyframes slide-in {
+  0% {
+    -webkit-transform: skew(15deg) translateX(300px);
+            transform: skew(15deg) translateX(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: skew(0) translateX(0);
+            transform: skew(0) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    -webkit-transform: skew(15deg) translateX(300px);
+            transform: skew(15deg) translateX(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: skew(0) translateX(0);
+            transform: skew(0) translateX(0);
+    opacity: 1;
+  }
+}
+
+.slideout {
+  -webkit-animation: slide-out 1.5s ease-out;
+          animation: slide-out 1.5s ease-out;
+}
+
+@-webkit-keyframes slide-out {
+  0% {
+    opacity: 0.5;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    opacity: 0.5;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+.eliminate {
+  -webkit-animation: mydel 0.35s forwards;
+          animation: mydel 0.35s forwards;
+}
+
+@-webkit-keyframes mydel {
+  0% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 0.75;
+  }
+  35% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes mydel {
+  0% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 0.75;
+  }
+  35% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.switch {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+section.vessel {
+  color: var(--text-primary);
+}
+
+section.vessel div.navbar p {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+section.vessel div.navbar p:hover {
+  color: var(--navbar-hover);
+  cursor: pointer;
+}
+
+section.vessel div.error-msg-empty, section.vessel div.error-msg-network {
+  display: none;
+  color: var(--text-danger);
+}
+
+section.vessel div.welcome-msg-popup {
+  display: none;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 5;
+}
+
+section.vessel div.welcome-msg-popup img {
+  border-radius: 50%;
+  width: 75px;
+  cursor: pointer;
+  opacity: var(--img-opacity);
+}
+
+section.vessel div.welcome-msg-popup p {
+  position: relative;
+  text-align: start;
+  display: inline-block;
+  border: 1px solid var(--text-primary) !important;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+section.vessel div.welcome-msg-popup p i {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  color: var(--text-danger);
+}
+
+section.vessel div.theme-toggler {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  background: #252729;
+  cursor: pointer;
+  z-index: 5;
+  -webkit-transition: all 2s;
+  transition: all 2s;
+}
+
+section.vessel div.theme-toggler:hover {
+  opacity: var(--img-opacity);
+}
+
+section.vessel div.theme-toggler i {
+  pointer-events: none;
+  font-size: 1.6rem;
+  color: #e2e2e2e7;
+}
+
+section.vessel div.search-field input {
+  width: 300px;
+  border: var(--border-width) solid var(--outline);
+}
+
+section.vessel div.search-field input:hover {
+  border: var(--border-width) solid var(--input-hover);
+}
+
+section.vessel div.search-field input:focus {
+  outline: none;
+  border: var(--border-width) solid var(--outline);
+  -webkit-box-shadow: 0 0 7px var(--input-focus) !important;
+          box-shadow: 0 0 7px var(--input-focus) !important;
+}
+
+section.vessel div.search-field button {
+  border: none;
+  background: var(--secondary);
+  color: var(--button-text);
+}
+
+section.vessel div.search-field button:hover {
+  background: var(--hover-background);
+  color: var(--hover-text) !important;
+}
+
+section.vessel div.search-field button:focus {
+  outline: none;
+  color: var(--hover-text) !important;
+  border: 4px solid var(--outline);
+  -webkit-box-shadow: 0 0 5px var(--outline);
+          box-shadow: 0 0 5px var(--outline);
+}
+
+section.vessel div.users-container {
+  display: none;
+}
+
+section.vessel div.users-container .img-details img {
+  border-radius: 50%;
+  width: 200px;
+  -webkit-box-shadow: 0 0 10px var(--img-shadow);
+          box-shadow: 0 0 10px var(--img-shadow);
+  opacity: var(--img-opacity);
+}
+
+section.vessel div.users-container .contents ul {
+  list-style: none;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (100px)[3];
+      grid-template-columns: repeat(3, 100px);
+  -ms-grid-rows: (120px)[2];
+      grid-template-rows: repeat(2, 120px);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+section.vessel div.users-container .view button {
+  background: var(--secondary);
+  color: var(--button-text) !important;
+}
+
+section.vessel div.users-container .view button:hover {
+  background: var(--hover-background) !important;
+  color: var(--hover-text) !important;
+}
+
+section.vessel div.users-container .view button:focus {
+  outline: none;
+  color: var(--hover-text) !important;
+  border: 4px solid var(--outline);
+  -webkit-box-shadow: 0 0 5px var(--outline);
+          box-shadow: 0 0 5px var(--outline);
+}
+/*# sourceMappingURL=style.css.map */
