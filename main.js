@@ -2,10 +2,13 @@
 const container = document.querySelector(".users-container");
 const info = document.querySelector(".app-info");
 const emptyVal = document.querySelector(".error-msg-empty");
-const networkError = document.querySelector(".error-msg-network");
+const networkError = document.querySelector(".network-error");
+const userError = document.querySelector(".user-error");
 const inputVal = document.getElementById("val");
 const searchBtn = document.getElementById("search");
 const viewBtn = document.getElementById("view");
+const tryAgainBtn = document.querySelector(".tryagn");
+const reloadBtn = document.querySelectorAll(".reload");
 const img = document.querySelector(".dis-img");
 const userName = document.querySelector(".username");
 const bio = document.querySelector(".bio");
@@ -18,10 +21,16 @@ const blog = document.getElementById("blg");
 const popupMsg = document.querySelector(".welcome-msg-popup");
 const deletePopup = document.getElementById("remove-popup");
 const toggler = document.querySelector(".theme-toggler");
+const ovrlay = document.querySelector(".overlay");
 let x = 0;
 //Event Listeners
 inputVal.addEventListener("keyup", pressEnter);
 searchBtn.addEventListener("click", render);
+tryAgainBtn.addEventListener("click", closeModalError);
+reloadBtn.forEach((el) => {
+  el.addEventListener("click", reload);
+});
+ovrlay.addEventListener("click", closeModalError);
 deletePopup.addEventListener("click", removePopup);
 toggler.addEventListener("click", themeSwap);
 document.addEventListener("scroll", popupSlide);
@@ -41,15 +50,19 @@ function pressEnter(e) {
     render();
   }
 }
+function reload() {
+  window.location.reload();
+}
 function render() {
   if (inputVal.value === "") {
     emptyVal.style.display = "block";
+    info.style.display = "none";
   } else {
     setTimeout(() => {
       container.style.display = "block";
     }, 1000);
     emptyVal.style.display = "none";
-    networkError.style.display = "none";
+    networkError.classList.add("d-none");
     info.style.display = "none";
     test();
   }
@@ -62,6 +75,7 @@ function test() {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      const err = data.message;
       const userData = data.name;
       const bioData = data.bio;
       const profileData = data.html_url;
@@ -73,28 +87,50 @@ function test() {
       const gistData = data.public_gists;
       const blogData = data.blog;
 
-      userName.innerHTML = userData;
-      bio.innerHTML = bioData;
-      viewBtn.href = profileData;
-      img.innerHTML =
-        `<img
-            src="` +
-        userAvatar +
-        `"
-            alt="Avatar"
-          />`;
-      follower.innerHTML = followerData;
-      followin.innerHTML = followingData;
-      comp.innerHTML = companyData;
-      repo.innerHTML = repoData;
-      gist.innerHTML = gistData;
-      blog.innerHTML = blogData;
-      blog.href = blogData;
+      if (err === "Not Found") {
+        container.classList.add("d-none");
+        ovrlay.classList.remove("d-none");
+        setTimeout(() => {
+          userError.classList.remove("d-none");
+        }, 350);
+      } else {
+        container.classList.remove("d-none");
+        userName.innerHTML = userData;
+        bio.innerHTML = bioData;
+        viewBtn.href = profileData;
+        img.innerHTML =
+          `<img
+              src="` +
+          userAvatar +
+          `"
+              alt="Avatar"
+            />`;
+        follower.innerHTML = followerData;
+        followin.innerHTML = followingData;
+        comp.innerHTML = companyData;
+        repo.innerHTML = repoData;
+        gist.innerHTML = gistData;
+        blog.innerHTML = blogData;
+        blog.href = blogData;
+      }
     })
-    .catch((error) => {
-      networkError.style.display = "block";
+    .catch(() => {
+      container.classList.add("d-none");
+      ovrlay.classList.remove("d-none");
+      setTimeout(() => {
+        networkError.classList.remove("d-none");
+      }, 350);
     });
 }
+
+function closeModalError() {
+  setTimeout(() => {
+    userError.classList.add("d-none");
+    networkError.classList.add("d-none");
+    ovrlay.classList.add("d-none");
+  }, 200);
+}
+
 function removePopup(e) {
   e.target.parentElement.parentElement.classList.add("eliminate");
   setTimeout(() => {

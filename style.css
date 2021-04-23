@@ -8,11 +8,11 @@
   --hover-text: #fff;
   --navbar-hover: #fff;
   --input-hover: var(--outline);
-  --input-focus: var(--text-primary);
+  --input-focus: rgb(212, 212, 212);
   --outline: #6c757d52;
   --img-opacity: 0.85;
   --img-shadow: #d8edff;
-  --border-width: 4px;
+  --border-width: 3px;
 }
 
 .normalmode {
@@ -149,11 +149,93 @@ body {
   }
 }
 
+.error-modal-popup {
+  -webkit-animation: er-mod 0.13s;
+          animation: er-mod 0.13s;
+}
+
+@-webkit-keyframes er-mod {
+  from {
+    -webkit-transform: scale(1) translateX(10px) translateY(10px);
+            transform: scale(1) translateX(10px) translateY(10px);
+  }
+  to {
+    -webkit-transform: scale(0.9) translateX(-20px) translateY(-10px);
+            transform: scale(0.9) translateX(-20px) translateY(-10px);
+  }
+}
+
+@keyframes er-mod {
+  from {
+    -webkit-transform: scale(1) translateX(10px) translateY(10px);
+            transform: scale(1) translateX(10px) translateY(10px);
+  }
+  to {
+    -webkit-transform: scale(0.9) translateX(-20px) translateY(-10px);
+            transform: scale(0.9) translateX(-20px) translateY(-10px);
+  }
+}
+
 .switch {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
   -webkit-transition: all 1s;
   transition: all 1s;
+}
+
+.error-modal {
+  background: var(--primary);
+  width: 30%;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 40%;
+  right: 40%;
+  margin-right: -40px;
+  z-index: 7;
+}
+
+.error-modal-brdr {
+  border-radius: 0.5rem 0 0 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.5%;
+  height: 100%;
+}
+
+.error-modal-btn {
+  position: absolute;
+  right: 0;
+}
+
+.error-modal-btn button {
+  border: none;
+  background: var(--secondary);
+  color: var(--button-text);
+}
+
+.error-modal-btn button:hover {
+  background: var(--hover-background);
+  color: var(--hover-text) !important;
+}
+
+.error-modal-btn button:focus {
+  outline: none;
+  border: none;
+  color: var(--hover-text) !important;
+  -webkit-box-shadow: 0 0 10px 5px var(--outline);
+          box-shadow: 0 0 10px 5px var(--outline);
+}
+
+.error-modal-description {
+  cursor: none;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.error-modal-description:hover {
+  color: var(--hover-text);
+  opacity: 0.8;
 }
 
 section.vessel {
@@ -170,9 +252,19 @@ section.vessel div.navbar p:hover {
   cursor: pointer;
 }
 
-section.vessel div.error-msg-empty, section.vessel div.error-msg-network {
+section.vessel div.error-msg-empty {
   display: none;
   color: var(--text-danger);
+}
+
+section.vessel div.overlay {
+  background: black;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 6;
+  opacity: 0.6;
 }
 
 section.vessel div.welcome-msg-popup {
@@ -195,6 +287,7 @@ section.vessel div.welcome-msg-popup p {
   text-align: start;
   display: inline-block;
   border: 1px solid var(--text-primary) !important;
+  background: var(--primary);
   padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
@@ -220,8 +313,8 @@ section.vessel div.theme-toggler {
   bottom: 1rem;
   left: 1rem;
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: #252729;
   cursor: pointer;
   z-index: 5;
@@ -235,7 +328,7 @@ section.vessel div.theme-toggler:hover {
 
 section.vessel div.theme-toggler i {
   pointer-events: none;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   color: #e2e2e2e7;
 }
 

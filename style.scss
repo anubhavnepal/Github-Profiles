@@ -56,9 +56,65 @@ body {
     }
   }
 }
+.error-modal-popup {
+  animation: er-mod 0.13s;
+  @keyframes er-mod {
+    from {
+      transform: scale(1) translateX(10px) translateY(10px);
+    }
+    to {
+      transform: scale(0.9) translateX(-20px) translateY(-10px);
+    }
+  }
+}
 .switch {
   transform: scale(1.1);
   transition: all 1s;
+}
+.error-modal {
+  background: var(--primary);
+  width: 30%;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 40%;
+  right: 40%;
+  margin-right: -40px;
+  z-index: 7;
+}
+.error-modal-brdr {
+  border-radius: 0.5rem 0 0 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.5%;
+  height: 100%;
+}
+.error-modal-btn {
+  position: absolute;
+  right: 0;
+  button {
+    border: none;
+    background: var(--secondary);
+    color: var(--button-text);
+    &:hover {
+      background: var(--hover-background);
+      color: var(--hover-text) !important;
+    }
+    &:focus {
+      outline: none;
+      border: none;
+      color: var(--hover-text) !important;
+      box-shadow: 0 0 10px 5px var(--outline);
+    }
+  }
+}
+.error-modal-description {
+  cursor: none;
+  transition: all 0.3s ease-out;
+  &:hover {
+    color: var(--hover-text);
+    opacity: 0.8;
+  }
 }
 section {
   &.vessel {
@@ -73,10 +129,18 @@ section {
           }
         }
       }
-      &.error-msg-empty,
-      &.error-msg-network {
+      &.error-msg-empty {
         display: none;
         color: var(--text-danger);
+      }
+      &.overlay {
+        background: rgb(0, 0, 0);
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 6;
+        opacity: 0.6;
       }
       &.welcome-msg-popup {
         display: none;
@@ -95,6 +159,7 @@ section {
           text-align: start;
           display: inline-block;
           border: 1px solid var(--text-primary) !important;
+          background: var(--primary);
           padding: 0.5rem 1rem 0.5rem 1rem;
           i {
             position: absolute;
@@ -113,8 +178,8 @@ section {
         bottom: 1rem;
         left: 1rem;
         border-radius: 50%;
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         background: #252729;
         cursor: pointer;
         z-index: 5;
@@ -124,7 +189,7 @@ section {
         }
         i {
           pointer-events: none;
-          font-size: 1.6rem;
+          font-size: 1.35rem;
           color: #e2e2e2e7;
         }
       }
