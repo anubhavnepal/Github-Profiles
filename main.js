@@ -75,7 +75,7 @@ function test() {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      const err = data.message;
+      let err = data.message;
       const userData = data.name;
       const bioData = data.bio;
       const profileData = data.html_url;
@@ -114,12 +114,13 @@ function test() {
         blog.href = blogData;
       }
     })
-    .catch(() => {
+    .catch((e) => {
       container.classList.add("d-none");
       ovrlay.classList.remove("d-none");
       setTimeout(() => {
         networkError.classList.remove("d-none");
       }, 350);
+      console.log(e);
     });
 }
 

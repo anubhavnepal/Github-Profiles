@@ -121,6 +121,13 @@ section {
     color: var(--text-primary);
     div {
       &.navbar {
+        .logo {
+          display: block;
+          background: var(--logo);
+          background-size: contain;
+          width: 40px;
+          height: 40px;
+        }
         p {
           transition: all 1s;
           &:hover {

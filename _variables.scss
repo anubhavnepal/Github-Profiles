@@ -8,12 +8,12 @@
   --hover-text: #fff;
   --navbar-hover: #fff;
   --input-hover: var(--outline);
-  // --input-focus: var(--text-primary);
   --input-focus: rgb(212, 212, 212);
   --outline: #6c757d52;
   --img-opacity: 0.85;
   --img-shadow: #d8edff;
   --border-width: 3px;
+  --logo: url(img/logo-normal.png) no-repeat;
 }
 
 .normalmode {
@@ -31,4 +31,5 @@
   --img-opacity: 0.93;
   --img-shadow: #e13855ad;
   --border-width: 2px;
+  --logo: url(img/logo-dark.png) no-repeat;
 }

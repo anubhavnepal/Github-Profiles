@@ -13,6 +13,7 @@
   --img-opacity: 0.85;
   --img-shadow: #d8edff;
   --border-width: 3px;
+  --logo: url(img/logo-normal.png) no-repeat;
 }
 
 .normalmode {
@@ -30,6 +31,7 @@
   --img-opacity: 0.93;
   --img-shadow: #e13855ad;
   --border-width: 2px;
+  --logo: url(img/logo-dark.png) no-repeat;
 }
 
 body {
@@ -240,6 +242,14 @@ body {
 
 section.vessel {
   color: var(--text-primary);
+}
+
+section.vessel div.navbar .logo {
+  display: block;
+  background: var(--logo);
+  background-size: contain;
+  width: 40px;
+  height: 40px;
 }
 
 section.vessel div.navbar p {
