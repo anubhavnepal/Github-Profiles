@@ -3,6 +3,7 @@
   --secondary: #212529;
   --text-primary: #6c757d;
   --text-danger: #dc3545e3;
+  --error-modal: var(--primary);
   --button-text: #6c757d;
   --hover-background: #2d3338;
   --hover-text: #fff;
@@ -21,6 +22,7 @@
   --secondary: #e13855;
   --text-primary: #736c65;
   --text-danger: #c70a2b;
+  --error-modal: #ccc3bd;
   --button-text: #fff;
   --hover-background: #de2244;
   --hover-text: #f2e9e4;
@@ -29,23 +31,26 @@
   --input-focus: var(--outline);
   --outline: #d64c65;
   --img-opacity: 0.93;
-  --img-shadow: #e13855ad;
+  --img-shadow: rgb(101, 95, 88);
   --border-width: 2px;
   --logo: url(img/logo-dark.png) no-repeat;
 }
 
+/**
+*
+* Testing
+*
+**/
 body {
   background: var(--primary);
 }
 
-.hide {
-  display: inline-block !important;
+.overflw {
+  overflow: hidden;
 }
 
-.dis-flex {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+.hide {
+  display: inline-block !important;
 }
 
 .slidein {
@@ -186,7 +191,7 @@ body {
 }
 
 .error-modal {
-  background: var(--primary);
+  background: var(--error-modal);
   width: 30%;
   border-radius: 0.5rem;
   position: absolute;
@@ -194,6 +199,30 @@ body {
   right: 40%;
   margin-right: -40px;
   z-index: 7;
+}
+
+@media (max-width: 365px) {
+  .error-modal {
+    width: 96vw !important;
+    right: 1%;
+    margin-right: 5px;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  .error-modal {
+    width: 96vw !important;
+    right: 1%;
+    margin-right: 5px;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 770px) {
+  .error-modal {
+    width: 90% !important;
+    right: 2%;
+    margin-right: 15px;
+  }
 }
 
 .error-modal-brdr {
@@ -205,6 +234,18 @@ body {
   height: 100%;
 }
 
+@media (max-width: 365px) {
+  .error-description {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  .error-description {
+    font-size: 0.9rem !important;
+  }
+}
+
 .error-modal-btn {
   position: absolute;
   right: 0;
@@ -214,6 +255,18 @@ body {
   border: none;
   background: var(--secondary);
   color: var(--button-text);
+}
+
+@media (max-width: 365px) {
+  .error-modal-btn button {
+    margin-right: 0.3rem !important;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  .error-modal-btn button {
+    margin-right: 0.3rem !important;
+  }
 }
 
 .error-modal-btn button:hover {
@@ -229,19 +282,30 @@ body {
           box-shadow: 0 0 10px 5px var(--outline);
 }
 
-.error-modal-description {
-  cursor: none;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-
-.error-modal-description:hover {
-  color: var(--hover-text);
-  opacity: 0.8;
-}
-
 section.vessel {
   color: var(--text-primary);
+}
+
+@media (max-width: 365px) {
+  section.vessel div.navbar {
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+  }
+  section.vessel div.navbar .logo-title-right {
+    display: none;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.navbar .logo-title-left {
+    padding-left: 0.4rem !important;
+    padding-right: 0 !important;
+  }
+  section.vessel div.navbar .logo-title-right {
+    padding-left: 0 !important;
+    padding-right: 0.4rem !important;
+  }
 }
 
 section.vessel div.navbar .logo {
@@ -276,12 +340,91 @@ section.vessel div.overlay {
   opacity: 0.6;
 }
 
+section.vessel div.limit-error {
+  width: 50%;
+  right: 25%;
+  margin-right: -25px;
+}
+
+@media (max-width: 365px) {
+  section.vessel div.limit-error {
+    width: 98vw !important;
+    height: 30vw;
+    right: 1%;
+    margin-right: 1px;
+  }
+  section.vessel div.limit-error .error-modal-btn {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-right: 1rem;
+  }
+  section.vessel div.limit-error .error-modal-btn p {
+    margin-right: 0 !important;
+    font-size: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  section.vessel div.limit-error .error-modal-btn p span {
+    font-weight: bold;
+    display: block !important;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.limit-error {
+    width: 98vw !important;
+    height: 30vw;
+    right: 1%;
+    margin-right: 1px;
+  }
+  section.vessel div.limit-error .error-description {
+    font-weight: 600;
+    font-size: 1.1rem !important;
+  }
+  section.vessel div.limit-error .error-modal-btn {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-right: 1rem;
+  }
+  section.vessel div.limit-error .error-modal-btn p {
+    margin-right: 0 !important;
+    font-size: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  section.vessel div.limit-error .error-modal-btn p span {
+    font-weight: bold;
+    display: block !important;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 770px) {
+  section.vessel div.limit-error {
+    right: 2%;
+    margin-right: 15px;
+  }
+}
+
 section.vessel div.welcome-msg-popup {
   display: none;
   position: fixed;
   right: 1rem;
   bottom: 1rem;
   z-index: 5;
+}
+
+@media (max-width: 365px) {
+  section.vessel div.welcome-msg-popup {
+    display: none !important;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.welcome-msg-popup {
+    display: none !important;
+  }
 }
 
 section.vessel div.welcome-msg-popup img {
@@ -331,6 +474,28 @@ section.vessel div.theme-toggler {
   transition: all 2s;
 }
 
+@media (max-width: 365px) {
+  section.vessel div.theme-toggler {
+    width: 50px;
+    height: 50px;
+    bottom: 0.3rem;
+    left: 0.3rem;
+  }
+  section.vessel div.theme-toggler i {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.theme-toggler {
+    bottom: 0.3rem;
+    left: 0.3rem;
+  }
+  section.vessel div.theme-toggler i {
+    font-size: 1.2rem !important;
+  }
+}
+
 section.vessel div.theme-toggler:hover {
   opacity: var(--img-opacity);
 }
@@ -344,6 +509,18 @@ section.vessel div.theme-toggler i {
 section.vessel div.search-field input {
   width: 300px;
   border: var(--border-width) solid var(--outline);
+}
+
+@media (max-width: 365px) {
+  section.vessel div.search-field input {
+    width: 200px;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.search-field input {
+    width: 250px;
+  }
 }
 
 section.vessel div.search-field input:hover {
@@ -376,8 +553,16 @@ section.vessel div.search-field button:focus {
           box-shadow: 0 0 5px var(--outline);
 }
 
-section.vessel div.users-container {
-  display: none;
+@media (max-width: 365px) {
+  section.vessel div.search-field button:focus {
+    border: 2px solid var(--outline);
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.search-field button:focus {
+    border: 2px solid var(--outline);
+  }
 }
 
 section.vessel div.users-container .img-details img {
@@ -386,6 +571,18 @@ section.vessel div.users-container .img-details img {
   -webkit-box-shadow: 0 0 10px var(--img-shadow);
           box-shadow: 0 0 10px var(--img-shadow);
   opacity: var(--img-opacity);
+}
+
+@media (max-width: 365px) {
+  section.vessel div.users-container .img-details img {
+    width: 150px;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.users-container .img-details img {
+    width: 150px;
+  }
 }
 
 section.vessel div.users-container .contents ul {
@@ -399,6 +596,34 @@ section.vessel div.users-container .contents ul {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+@media (max-width: 365px) {
+  section.vessel div.users-container .contents ul {
+    -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+    word-wrap: break-word;
+    margin-bottom: 1rem;
+    -ms-grid-columns: (150px)[2];
+        grid-template-columns: repeat(2, 150px);
+    -ms-grid-rows: (150px)[2];
+        grid-template-rows: repeat(2, 150px);
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.users-container .contents ul {
+    -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+    word-wrap: break-word;
+    margin-bottom: 1rem;
+    -ms-grid-columns: (150px)[2];
+        grid-template-columns: repeat(2, 150px);
+    -ms-grid-rows: (150px)[2];
+        grid-template-rows: repeat(2, 150px);
+  }
 }
 
 section.vessel div.users-container .view button {

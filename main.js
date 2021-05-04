@@ -22,6 +22,8 @@ const popupMsg = document.querySelector(".welcome-msg-popup");
 const deletePopup = document.getElementById("remove-popup");
 const toggler = document.querySelector(".theme-toggler");
 const ovrlay = document.querySelector(".overlay");
+const limitError = document.querySelector(".limit-error");
+let limitTime = document.getElementById("limit-time");
 let x = 0;
 //Event Listeners
 inputVal.addEventListener("keyup", pressEnter);
@@ -35,11 +37,9 @@ deletePopup.addEventListener("click", removePopup);
 toggler.addEventListener("click", themeSwap);
 document.addEventListener("scroll", popupSlide);
 //Functions
-function toggleSlide() {
   window.setTimeout(() => {
-    toggler.classList.add("dis-flex");
+    toggler.classList.remove("d-none");
   }, 4000);
-}
 function popupSlide() {
   window.setTimeout(() => {
     popupMsg.style.display = "inline";
@@ -59,21 +59,27 @@ function render() {
     info.style.display = "none";
   } else {
     setTimeout(() => {
-      container.style.display = "block";
+      container.classList.remove("d-none");
     }, 1000);
     emptyVal.style.display = "none";
     networkError.classList.add("d-none");
     info.style.display = "none";
     test();
+    ratelimit();
   }
   inputVal.value = "";
 }
+function apiData() {
+  return fetch(apiUrl(inputVal.value)).then((res) => {
+    return res.json();
+  });
+}
+function apiUrl(value) {
+  return `https://api.github.com/users/${value}`;
+}
+
 function test() {
-  const api = "https://api.github.com/users/";
-  const userDetails = `${inputVal.value}`;
-  const url = api + userDetails;
-  fetch(url)
-    .then((response) => response.json())
+  apiData()
     .then((data) => {
       let err = data.message;
       const userData = data.name;
@@ -123,15 +129,54 @@ function test() {
       console.log(e);
     });
 }
-
+function ratelimit() {
+  fetch("https://api.github.com/rate_limit")
+    .then((res) => res.json())
+    .then((data) => {
+      const left = data.resources.core.remaining;
+      const timestap = data.resources.core.reset;
+      if (left === 60) {
+        container.classList.add("d-none");
+        limitError.classList.remove("d-none");
+        ovrlay.classList.remove("d-none");
+        document.body.classList.add("overflw");
+      } else{
+        container.classList.remove("d-none");
+        limitError.classList.add("d-none");
+        ovrlay.classList.add("d-none");
+        document.body.classList.remove("overflw");
+      }
+      let current = new Date().getTime();
+      let epoch = new Date(timestap * 1000).getTime();
+      let diff = epoch - current;
+      let hr = Math.floor(diff / (1000 * 60 * 60));
+      console.log(hr);
+      let min = Math.floor(diff / (1000 * 60));
+      console.log(min);
+      let sec = Math.floor(diff / 1000);
+      console.log(sec);
+      if (hr === 0 || hr === 1) {
+        limitTime.innerHTML = "In an hour";
+      }
+      if (min <= 50) {
+        limitTime.innerHTML = `In ${min} minutes`;
+      }
+      if (min <= 1) {
+        limitTime.innerHTML = `In a minute`;
+      }
+      if (sec === 30) {  
+        limitTime.innerHTML = `In a few seconds`;
+      }
+    });
+}
 function closeModalError() {
   setTimeout(() => {
     userError.classList.add("d-none");
     networkError.classList.add("d-none");
+    limitError.classList.add("d-none");
     ovrlay.classList.add("d-none");
   }, 200);
 }
-
 function removePopup(e) {
   e.target.parentElement.parentElement.classList.add("eliminate");
   setTimeout(() => {
@@ -162,4 +207,3 @@ function themeSwap(e) {
     }, 600);
   }
 }
-toggleSlide();

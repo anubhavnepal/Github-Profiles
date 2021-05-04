@@ -3,6 +3,7 @@
   --secondary: #212529;
   --text-primary: #6c757d;
   --text-danger: #dc3545e3;
+  --error-modal: var(--primary);
   --button-text: #6c757d;
   --hover-background: #2d3338;
   --hover-text: #fff;
@@ -21,6 +22,7 @@
   --secondary: #e13855;
   --text-primary: #736c65;
   --text-danger: #c70a2b;
+  --error-modal: #ccc3bd;
   --button-text: #fff;
   --hover-background: #de2244;
   --hover-text: #f2e9e4;
@@ -29,7 +31,7 @@
   --input-focus: var(--outline);
   --outline: #d64c65;
   --img-opacity: 0.93;
-  --img-shadow: #e13855ad;
+  --img-shadow: rgb(101, 95, 88);
   --border-width: 2px;
   --logo: url(img/logo-dark.png) no-repeat;
 }

@@ -22,18 +22,18 @@
     <title>VIEWER BEAM: GET GITHUB USER DETAILS</title>
   </head>
 
-  <body>
+  <body class="normalmode">
     <section class="vessel text-center">
       <div
         class="navbar title border-secondary border-bottom d-flex justify-content-between align-items-center"
       >
         <div
-          class="fs-4 px-4 pt-3 d-flex justify-content-center align-items-center"
+          class="logo-title-left fs-4 px-4 pt-3 d-flex justify-content-center align-items-center"
         >
           <div class="logo"></div>
           <p class="m-0 ms-2">VIEWER BEAM</p>
         </div>
-        <div class="fs-7 px-4 pt-3">
+        <div class="logo-title-right fs-7 px-4 pt-3">
           <p class="m-0">Github User Details</p>
         </div>
       </div>
@@ -55,10 +55,8 @@
           height="45px"
         />
         <div class="text-start ms-3">
-          <h4 class="error-modal-description d-inline-block m-0">Error</h4>
-          <p class="error-modal-description m-0 fs-6">
-            Network connection lost
-          </p>
+          <h4 class="d-inline-block m-0">Error</h4>
+          <p class="error-description m-0 fs-6">Network connection lost</p>
         </div>
         <div class="error-modal-btn">
           <button class="btn reload me-3">Refresh</button>
@@ -76,11 +74,31 @@
           height="45px"
         />
         <div class="text-start ms-3">
-          <h4 class="error-modal-description d-inline-block m-0">Error</h4>
-          <p class="error-modal-description m-0 fs-6">Couldn't find the user</p>
+          <h4 class="d-inline-block m-0">Error</h4>
+          <p class="error-description m-0 fs-6">Couldn't find the user</p>
         </div>
         <div class="try-again error-modal-btn">
           <button class="btn tryagn me-3">Try Again</button>
+        </div>
+      </div>
+      <div
+        class="limit-error error-modal error-modal-popup p-2 text-center d-flex justify-content-start align-items-center"
+      >
+        <div class="error-modal-brdr bg-danger"></div>
+        <img
+          src="img/warning.png"
+          class="ms-3"
+          alt=""
+          width="45px"
+          height="45px"
+        />
+        <div class="text-start ms-3">
+          <h4 class="d-inline-block m-0">Error</h4>
+          <p class="error-description m-0 fs-6">Rate limit exceeded</p>
+        </div>
+        <div class="error-modal-btn d-flex align-items-center">
+          <p class="m-0 fs-4 me-5">Available: <span id="limit-time"></span></p>
+          <button class="btn reload me-3">Refresh</button>
         </div>
       </div>
       <div class="overlay d-none"></div>
@@ -111,7 +129,7 @@
         />
         <button class="rounded-pill p-2 px-3" id="search">Search</button>
       </div>
-      <div class="users-container mt-5">
+      <div class="users-container mt-5 d-none">
         <div class="img-details">
           <div class="dis-img"></div>
           <h3 class="username mt-4"></h3>
