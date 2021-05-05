@@ -187,6 +187,12 @@ section {
         height: 100vw;
         z-index: 6;
         opacity: 0.6;
+        @include media("<=phone") {
+          height: 110%;
+        }
+        @include media(">phone", "<=425px") {
+          height: 110%;
+        }
       }
       &.limit-error {
         width: 50%;
