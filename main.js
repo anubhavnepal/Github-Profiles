@@ -136,12 +136,12 @@ function ratelimit() {
       const left = data.resources.core.remaining;
       const timestap = data.resources.core.reset;
       if (left === 0) {
-        container.classList.add("d-none");
+        container.style = "display:none";
         limitError.classList.remove("d-none");
         ovrlay.classList.remove("d-none");
         document.body.classList.add("overflw");
       } else{
-        container.classList.remove("d-none");
+        container.style = "display:block !important";
         limitError.classList.add("d-none");
         ovrlay.classList.add("d-none");
         document.body.classList.remove("overflw");
