@@ -135,7 +135,7 @@ function ratelimit() {
     .then((data) => {
       const left = data.resources.core.remaining;
       const timestap = data.resources.core.reset;
-      if (left === 60) {
+      if (left === 0) {
         container.classList.add("d-none");
         limitError.classList.remove("d-none");
         ovrlay.classList.remove("d-none");
