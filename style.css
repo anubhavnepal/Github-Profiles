@@ -340,6 +340,18 @@ section.vessel div.overlay {
   opacity: 0.6;
 }
 
+@media (max-width: 365px) {
+  section.vessel div.overlay {
+    height: 120vh;
+  }
+}
+
+@media (min-width: 366px) and (max-width: 425px) {
+  section.vessel div.overlay {
+    height: 120vh;
+  }
+}
+
 section.vessel div.limit-error {
   width: 50%;
   right: 25%;
