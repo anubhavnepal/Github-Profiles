@@ -132,7 +132,7 @@ body {
       outline: none;
       border: none;
       color: var(--hover-text) !important;
-      box-shadow: 0 0 10px 5px var(--outline);
+      box-shadow: 0 0 5px var(--outline);
     }
   }
 }
@@ -184,7 +184,7 @@ section {
         position: absolute;
         top: 0;
         width: 100vw;
-        height: 100vh;
+        height: 100vw;
         z-index: 6;
         opacity: 0.6;
       }
@@ -234,9 +234,9 @@ section {
             }
           }
         }
-         @include media('>425px', "<=tablet"){
-           right: 2%;
-           margin-right: 15px;
+        @include media(">425px", "<=tablet") {
+          right: 2%;
+          margin-right: 15px;
         }
       }
       &.welcome-msg-popup {
@@ -252,10 +252,10 @@ section {
           display: none !important;
         }
         img {
+          background: #b7ae9e;
           border-radius: 50%;
           width: 75px;
           cursor: pointer;
-          opacity: var(--img-opacity);
         }
         p {
           position: relative;
@@ -393,6 +393,14 @@ section {
           }
         }
         .view {
+          @include media("<=phone") {
+            margin-top: 1.5rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          @include media(">phone", "<=425px") {
+            margin-top: 1.5rem !important;
+            margin-bottom: 0.5rem !important;
+          }
           button {
             background: var(--secondary);
             color: var(--button-text) !important;
@@ -405,6 +413,12 @@ section {
               color: var(--hover-text) !important;
               border: 4px solid var(--outline);
               box-shadow: 0 0 5px var(--outline);
+              @include media("<=phone") {
+                border: 2px solid var(--outline);
+              }
+              @include media(">phone", "<=425px") {
+                border: 2px solid var(--outline);
+              }
             }
           }
         }

@@ -1,6 +1,5 @@
 //Selecors
 const container = document.querySelector(".users-container");
-const info = document.querySelector(".app-info");
 const emptyVal = document.querySelector(".error-msg-empty");
 const networkError = document.querySelector(".network-error");
 const userError = document.querySelector(".user-error");
@@ -37,9 +36,9 @@ deletePopup.addEventListener("click", removePopup);
 toggler.addEventListener("click", themeSwap);
 document.addEventListener("scroll", popupSlide);
 //Functions
-  window.setTimeout(() => {
-    toggler.classList.remove("d-none");
-  }, 4000);
+window.setTimeout(() => {
+  toggler.classList.remove("d-none");
+}, 4000);
 function popupSlide() {
   window.setTimeout(() => {
     popupMsg.style.display = "inline";
@@ -56,15 +55,13 @@ function reload() {
 function render() {
   if (inputVal.value === "") {
     emptyVal.style.display = "block";
-    info.style.display = "none";
   } else {
     setTimeout(() => {
       container.classList.remove("d-none");
     }, 1000);
     emptyVal.style.display = "none";
     networkError.classList.add("d-none");
-    info.style.display = "none";
-    test();
+    getUserDetails();
     ratelimit();
   }
   inputVal.value = "";
@@ -78,7 +75,7 @@ function apiUrl(value) {
   return `https://api.github.com/users/${value}`;
 }
 
-function test() {
+function getUserDetails() {
   apiData()
     .then((data) => {
       let err = data.message;
@@ -94,12 +91,15 @@ function test() {
       const blogData = data.blog;
 
       if (err === "Not Found") {
+        document.body.classList.add("overflw");
+        inputVal.readOnly = true;
         container.classList.add("d-none");
         ovrlay.classList.remove("d-none");
         setTimeout(() => {
           userError.classList.remove("d-none");
         }, 350);
       } else {
+        document.body.classList.remove("overflw");
         container.classList.remove("d-none");
         userName.innerHTML = userData;
         bio.innerHTML = bioData;
@@ -116,17 +116,22 @@ function test() {
         comp.innerHTML = companyData;
         repo.innerHTML = repoData;
         gist.innerHTML = gistData;
-        blog.innerHTML = blogData;
-        blog.href = blogData;
+        if (blogData === "") {
+          blog.innerHTML = "";
+        } else {
+          blog.innerHTML = "link";
+          blog.href = blogData;
+        }
       }
     })
-    .catch((e) => {
+    .catch(() => {
+      inputVal.readOnly = true;
       container.classList.add("d-none");
       ovrlay.classList.remove("d-none");
+      document.body.classList.add("overflw");
       setTimeout(() => {
         networkError.classList.remove("d-none");
       }, 350);
-      console.log(e);
     });
 }
 function ratelimit() {
@@ -136,11 +141,13 @@ function ratelimit() {
       const left = data.resources.core.remaining;
       const timestap = data.resources.core.reset;
       if (left === 0) {
+        inputVal.readOnly = true;
         container.style = "display:none";
         limitError.classList.remove("d-none");
         ovrlay.classList.remove("d-none");
         document.body.classList.add("overflw");
-      } else{
+      } else {
+        inputVal.readOnly = false;
         container.style = "display:block !important";
         limitError.classList.add("d-none");
         ovrlay.classList.add("d-none");
@@ -150,11 +157,8 @@ function ratelimit() {
       let epoch = new Date(timestap * 1000).getTime();
       let diff = epoch - current;
       let hr = Math.floor(diff / (1000 * 60 * 60));
-      console.log(hr);
       let min = Math.floor(diff / (1000 * 60));
-      console.log(min);
       let sec = Math.floor(diff / 1000);
-      console.log(sec);
       if (hr === 0 || hr === 1) {
         limitTime.innerHTML = "In an hour";
       }
@@ -164,13 +168,15 @@ function ratelimit() {
       if (min <= 1) {
         limitTime.innerHTML = `In a minute`;
       }
-      if (sec === 30) {  
+      if (sec === 30) {
         limitTime.innerHTML = `In a few seconds`;
       }
     });
 }
 function closeModalError() {
   setTimeout(() => {
+    document.body.classList.remove("overflw");
+    inputVal.readOnly = false;
     userError.classList.add("d-none");
     networkError.classList.add("d-none");
     limitError.classList.add("d-none");
