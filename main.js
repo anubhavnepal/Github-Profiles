@@ -27,11 +27,10 @@ let x = 0;
 //Event Listeners
 inputVal.addEventListener("keyup", pressEnter);
 searchBtn.addEventListener("click", render);
-tryAgainBtn.addEventListener("click", closeModalError);
+tryAgainBtn.addEventListener("click", noUserFound);
 reloadBtn.forEach((el) => {
   el.addEventListener("click", reload);
 });
-ovrlay.addEventListener("click", closeModalError);
 deletePopup.addEventListener("click", removePopup);
 toggler.addEventListener("click", themeSwap);
 document.addEventListener("scroll", popupSlide);
@@ -93,7 +92,7 @@ function getUserDetails() {
       if (err === "Not Found") {
         document.body.classList.add("overflw");
         inputVal.readOnly = true;
-        container.classList.add("d-none");
+        container.style = "display:none";
         ovrlay.classList.remove("d-none");
         setTimeout(() => {
           userError.classList.remove("d-none");
@@ -126,7 +125,7 @@ function getUserDetails() {
     })
     .catch(() => {
       inputVal.readOnly = true;
-      container.classList.add("d-none");
+      container.style = "display:none";
       ovrlay.classList.remove("d-none");
       document.body.classList.add("overflw");
       setTimeout(() => {
@@ -173,13 +172,14 @@ function ratelimit() {
       }
     });
 }
-function closeModalError() {
+function noUserFound() {
   setTimeout(() => {
     document.body.classList.remove("overflw");
     inputVal.readOnly = false;
     userError.classList.add("d-none");
     networkError.classList.add("d-none");
     limitError.classList.add("d-none");
+    container.style = "display:none";
     ovrlay.classList.add("d-none");
   }, 200);
 }
