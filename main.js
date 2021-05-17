@@ -157,7 +157,6 @@ function ratelimit() {
       let hr = Math.floor(diff / (1000 * 60 * 60));
       let min = Math.floor(diff / (1000 * 60));
       let sec = Math.floor(diff / 1000);
-      console.log(sec);
       if (hr === 0 || hr === 1) {
         limitTime.innerHTML = "In an hour";
       }
@@ -167,7 +166,7 @@ function ratelimit() {
       if (min <= 1) {
         limitTime.innerHTML = `In a minute`;
       }
-      if (sec === 30) {
+      if (sec <= 30) {
         limitTime.innerHTML = `In a few seconds`;
       }
     });
