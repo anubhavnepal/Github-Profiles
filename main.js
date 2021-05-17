@@ -27,7 +27,7 @@ let x = 0;
 //Event Listeners
 inputVal.addEventListener("keyup", pressEnter);
 searchBtn.addEventListener("click", render);
-tryAgainBtn.addEventListener("click", noUserFound);
+tryAgainBtn.addEventListener("click", refreshAgain);
 reloadBtn.forEach((el) => {
   el.addEventListener("click", reload);
 });
@@ -55,12 +55,9 @@ function render() {
   if (inputVal.value === "") {
     emptyVal.style.display = "block";
   } else {
-    setTimeout(() => {
-      container.classList.remove("d-none");
-    }, 1000);
+    getUserDetails();
     emptyVal.style.display = "none";
     networkError.classList.add("d-none");
-    getUserDetails();
     ratelimit();
   }
   inputVal.value = "";
@@ -92,40 +89,46 @@ function getUserDetails() {
       if (err === "Not Found") {
         document.body.classList.add("overflw");
         inputVal.readOnly = true;
-        container.style = "display:none";
         ovrlay.classList.remove("d-none");
         setTimeout(() => {
           userError.classList.remove("d-none");
         }, 350);
       } else {
         document.body.classList.remove("overflw");
-        container.classList.remove("d-none");
-        userName.innerHTML = userData;
-        bio.innerHTML = bioData;
-        viewBtn.href = profileData;
-        img.innerHTML =
-          `<img
-              src="` +
-          userAvatar +
-          `"
-              alt="Avatar"
-            />`;
-        follower.innerHTML = followerData;
-        followin.innerHTML = followingData;
-        comp.innerHTML = companyData;
-        repo.innerHTML = repoData;
-        gist.innerHTML = gistData;
-        if (blogData === "") {
-          blog.innerHTML = "";
-        } else {
-          blog.innerHTML = "link";
-          blog.href = blogData;
-        }
-      }
+        setTimeout(() => {
+          container.classList.remove("d-none");
+          userName.innerHTML = userData;
+          bio.innerHTML = bioData;
+          viewBtn.href = profileData;
+          img.innerHTML =
+            `<img
+          src="` +
+            userAvatar +
+            `"
+          alt="Avatar"
+          />`;
+          follower.innerHTML = followerData;
+          followin.innerHTML = followingData;
+          comp.innerHTML = companyData;
+          repo.innerHTML = repoData;
+          gist.innerHTML = gistData;
+          if (blogData === "") {
+            blog.innerHTML = "-";
+            blog.style = "cursor:text; text-decoration:none; color:inherit";
+          } else {
+            blog.innerHTML = "link";
+            blog.style = "cursor:pointer; text-decoration:underline; color:#0066CC";
+            blog.href = blogData;
+         }
+         if (companyData === null) {
+           comp.innerHTML = "-";
+         }
+        }, 400);
+      } 
     })
     .catch(() => {
       inputVal.readOnly = true;
-      container.style = "display:none";
+      container.classList.add("d-none");
       ovrlay.classList.remove("d-none");
       document.body.classList.add("overflw");
       setTimeout(() => {
@@ -141,16 +144,12 @@ function ratelimit() {
       const timestap = data.resources.core.reset;
       if (left === 0) {
         inputVal.readOnly = true;
-        container.style = "display:none";
-        limitError.classList.remove("d-none");
-        ovrlay.classList.remove("d-none");
         document.body.classList.add("overflw");
-      } else {
-        inputVal.readOnly = false;
-        container.style = "display:block !important";
-        limitError.classList.add("d-none");
-        ovrlay.classList.add("d-none");
-        document.body.classList.remove("overflw");
+        container.innerHTML = "";
+         setTimeout(() => {
+        limitError.classList.remove("d-none");
+      }, 350);
+        ovrlay.classList.remove("d-none");
       }
       let current = new Date().getTime();
       let epoch = new Date(timestap * 1000).getTime();
@@ -158,6 +157,7 @@ function ratelimit() {
       let hr = Math.floor(diff / (1000 * 60 * 60));
       let min = Math.floor(diff / (1000 * 60));
       let sec = Math.floor(diff / 1000);
+      console.log(sec);
       if (hr === 0 || hr === 1) {
         limitTime.innerHTML = "In an hour";
       }
@@ -172,14 +172,14 @@ function ratelimit() {
       }
     });
 }
-function noUserFound() {
+function refreshAgain() {
   setTimeout(() => {
     document.body.classList.remove("overflw");
     inputVal.readOnly = false;
+    container.classList.add("d-none");
     userError.classList.add("d-none");
     networkError.classList.add("d-none");
     limitError.classList.add("d-none");
-    container.style = "display:none";
     ovrlay.classList.add("d-none");
   }, 200);
 }
